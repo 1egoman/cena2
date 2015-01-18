@@ -11,7 +11,7 @@ createCRUD = function(app, Model, name) {
   app.get("/" + pl, function(req, res) {
     Model.find({}, function(err, models) {
       if (err) {
-        res.send({err: err});
+        res.send({err: err.toString()});
       } else {
         res.send({data: models});
       }
@@ -23,7 +23,7 @@ createCRUD = function(app, Model, name) {
     var n = new Model(req.body);
     n.save(function(err) {
       if (err) {
-        res.send({err: err});
+        res.send({err: err.toString()});
       } else {
         res.send({status: "ok"});
       }
@@ -34,7 +34,7 @@ createCRUD = function(app, Model, name) {
   app.delete("/" + pl + "/:name", function(req, res) {
     Model.remove({name: req.params.name}, function(err) {
       if (err) {
-        res.send({err: err});
+        res.send({err: err.toString()});
       } else {
         res.send({status: "ok"});
       }
@@ -43,11 +43,11 @@ createCRUD = function(app, Model, name) {
 
   // update item
   app.put("/" + pl + "/:name", function(req, res) {
-    Model.update({name: req.params.name}, req.body, {}, function(err) {
+    Model.update({name: req.params.name}, req.body, {}, function(err, num, raw) {
       if (err) {
-        res.send({err: err});
+        res.send({err: err.toString()});
       } else {
-        res.send({status: "ok"});
+        res.send({status: "ok", num: num});
       }
     });
   });

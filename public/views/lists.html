@@ -1,0 +1,58 @@
+<div ng-controller="ListController">
+
+  <div class="list panel panel-default" ng-repeat="l in DispLists">
+    <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
+      {{l.name}} <small>{{l.desc}}</small>
+    </div>
+
+    <div class="panel-body row">
+      <div class="col-md-11">
+        <input
+          type="text"
+          ng-model="foodstuff"
+          typeahead="fs.name for fs in foodstuffs | filter:$viewValue | limitTo:8"
+          class="form-control"
+          placeholder="Add new item to list"
+        />
+      </div>
+      <div>
+        <button class="btn btn-primary" ng-click="addToList(l, foodstuff)">Add</button>
+      </div>
+    </div>
+
+    <!-- each item on the list -->
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="cnt in l.contents">
+        {{cnt.name}} <small>{{cnt.tags.join(", ")}}</small>
+
+        <!-- delete button -->
+        <button
+          class="btn btn-danger btn-xs pull-right"
+          ng-click="delFromList(l, cnt.name)"
+          >Delete
+        </button>
+
+        <!-- item price -->
+        <input
+          type="text"
+          class="form-control pull-right form-control-xs quantity"
+          ng-model="cnt.price"
+          ng-change="updateList(l)"
+          placeholder="Price"
+        />
+
+        <span class="pull-right">@</span>
+
+        <!-- item quantity -->
+        <input
+          type="number"
+          class="form-control pull-right form-control-xs quantity"
+          ng-model="cnt.amt"
+          ng-change="updateList(l)"
+          placeholder="Quantity"
+        />
+      </li>
+    </ul>
+  </div>
+
+</div>

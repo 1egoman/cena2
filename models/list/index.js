@@ -5,7 +5,7 @@ var listSchema = mongoose.Schema({
   "name": String,
   "desc": String,
   "tags": Array,
-  "content": Object
+  "contents": Array
 });
 
 
