@@ -6194,3 +6194,25 @@ button.close {
   padding: 5px;
   width: 100%;
 }
+.list-recipe {
+  border-color: #bce8f1;
+}
+.list-recipe > .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.list-recipe > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #bce8f1;
+}
+.list-recipe > .panel-heading .badge {
+  color: #d9edf7;
+  background-color: #31708f;
+}
+.list-recipe > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #bce8f1;
+}
+.list-no-gluten .panel-heading::before {
+  content: "[GF]";
+  color: #fc4b4b;
+}

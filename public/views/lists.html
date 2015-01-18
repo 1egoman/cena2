@@ -1,7 +1,10 @@
 <div ng-controller="ListController">
 
   <!-- display each list -->
-  <div class="list panel panel-default" ng-repeat="l in DispLists">
+  <div
+    class="list panel panel-default {{ 'list-' + l.tags.join(' list-') }}"
+    ng-repeat="l in DispLists"
+  >
     <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
       {{l.name}} <small>{{l.desc}}</small>
 

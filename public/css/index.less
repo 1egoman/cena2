@@ -42,3 +42,12 @@
   padding: 5px;
   width: 100%;
 }
+
+// special tags
+.list-recipe { .panel-info; }
+
+// gluten free
+.list-no-gluten .panel-heading::before {
+  content: "[GF]";
+  color: @brand-danger;
+}
