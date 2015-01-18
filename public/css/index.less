@@ -1,6 +1,10 @@
 // out: index.css
 @import "../bootstrap/less/bootstrap.less";
 
+.list {
+  .hidden-print;
+}
+
 .list small {
   color: @gray-light;
   margin-left: 4px;
@@ -41,6 +45,11 @@
 .input-group {
   padding: 5px;
   width: 100%;
+}
+
+// for printable list
+.printable-list {
+  h4 { font-size: 80%; }
 }
 
 // special tags

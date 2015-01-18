@@ -6163,6 +6163,11 @@ button.close {
     display: none !important;
   }
 }
+@media print {
+  .list {
+    display: none !important;
+  }
+}
 .list small {
   color: #777777;
   margin-left: 4px;
@@ -6193,6 +6198,9 @@ button.close {
 .input-group {
   padding: 5px;
   width: 100%;
+}
+.printable-list h4 {
+  font-size: 80%;
 }
 .list-recipe {
   border-color: #bce8f1;

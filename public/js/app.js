@@ -39,6 +39,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
 
   // place to store incoming list data
   root.newList = {};
+  root.printableList = {};
 
   ListService.get(function(all) {
     root.lists = all;
@@ -73,6 +74,8 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
       console.log(all)
       root.foodstuffs = all;
     });
+
+    root.doPrintableList();
   });
 
   // add new list
@@ -178,6 +181,40 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     return {price: totalPrice}
   };
 
+  // extract all items from a list
+  // and turn it into 1 big list
+  root.deItemizeList = function(list) {
+    return _.flatten(_.map(list.contents, function(l) {
+      if (l.contents) {
+        return root.deItemizeList(l);
+      } else {
+        return l;
+      };
+    }));
+  };
+
+  root.sortByTag = function(list) {
+    // flatten the list
+    flatList = root.deItemizeList(list);
+
+    // sort the list
+    return _.groupBy(flatList, function(n) {
+
+      // sort by sort tags that are present
+      return _.filter(n.tags, function(t) {
+        return t.indexOf("sort-") === 0;
+      }).join(" ") || "Unsorted";
+
+    });
+  };
+
+  root.doPrintableList = function() {
+    _.each(root.lists, function(l) {
+      root.printableList[l.name] = root.sortByTag(l);
+      console.log(root.printableList);
+    });
+  };
+
   // update all list instances
   $rootScope.$on("listUpdate", function(status, data) {
     root.lists = data;
@@ -189,6 +226,9 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
 
     // if we got nothing, display all
     if (root.DispLists.length === 0) root.DispLists = data;
+
+    // update printable list
+    root.doPrintableList();
   });
 
   // update all foodstuff instances

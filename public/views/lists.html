@@ -112,6 +112,27 @@
         </span>
       </li>
     </ul>
+
+
+  </div>
+
+
+
+
+  <!-- only display when printing -->
+  <div class="visible-print-block printable-list" ng-repeat="l in DispLists">
+    <h3>{{l.name}} <small>{{l.desc}}</small></h3>
+    <div ng-repeat="(k, v) in printableList[l.name]">
+      <h4>{{k}}</h4>
+      <ul>
+        <li ng-repeat="i in v" style="padding-right: 16px;">
+          {{i.name}}
+          <small>{{i.desc}}</small><br/>
+          <span>{{i.price | currency }}</span>
+          <span style="margin-left: 10px;">{{i.tags.join(', ')}}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 
 </div>
