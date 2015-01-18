@@ -34,7 +34,7 @@ app.config(['$routeProvider',
   }
 ]);
 
-app.controller("ListController", function($scope, $routeParams, ListService, FoodStuffService, $rootScope, $modal) {
+app.controller("ListController", function($scope, $routeParams, ListService, FoodStuffService, $rootScope, $location) {
   var root = $scope;
 
   // place to store incoming list data
@@ -84,8 +84,20 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
       // update all list instances
       ListService.get(function(all) {
         $rootScope.$emit("listUpdate", all);
+        $location.url("/lists");
       });
 
+    });
+  };
+
+  // delete list
+  root.delList = function(list) {
+    ListService.remove({name: list.name}, function(data) {
+      // update all list instances
+      ListService.get(function(all) {
+        root.lists = data;
+        $rootScope.$emit("listUpdate", all);
+      });
     });
   };
 
@@ -169,6 +181,14 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   // update all list instances
   $rootScope.$on("listUpdate", function(status, data) {
     root.lists = data;
+
+    // get lists to display
+    root.DispLists = _.filter(root.lists, function(list) {
+      return list.name == $routeParams.list;
+    });
+
+    // if we got nothing, display all
+    if (root.DispLists.length === 0) root.DispLists = data;
   });
 
   // update all foodstuff instances
@@ -193,6 +213,16 @@ app.factory("ListService", function($http) {
       $http({
         method: "post",
         url: "/lists",
+        data: angular.toJson(list)
+      }).success(function(data) {
+        cb && cb(data);
+      });
+    },
+
+    remove: function(list, cb) {
+      $http({
+        method: "delete",
+        url: "/lists/"+list.name,
         data: angular.toJson(list)
       }).success(function(data) {
         cb && cb(data);
@@ -293,7 +323,6 @@ app.factory("FoodStuffService", function($http) {
         cb && cb(data);
       });
     },
-
 
     update: function(list, cb) {
       $http({

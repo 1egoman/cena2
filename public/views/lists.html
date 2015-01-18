@@ -4,6 +4,13 @@
   <div class="list panel panel-default" ng-repeat="l in DispLists">
     <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
       {{l.name}} <small>{{l.desc}}</small>
+
+      <!-- delete button -->
+      <button
+        class="btn btn-danger btn-xs pull-right"
+        ng-click="delList(l)"
+        >Delete
+      </button>
     </div>
 
     <div class="panel-body row">
