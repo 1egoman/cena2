@@ -30,5 +30,5 @@ app.get("/", function(req, res) {
 // add all the external routes
 routes(app);
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
 console.log("-> :8000")
