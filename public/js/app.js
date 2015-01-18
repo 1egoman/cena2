@@ -22,7 +22,7 @@ app.config(['$routeProvider',
   }
 ]);
 
-app.controller("ListController", function($scope, $routeParams, ListService, $rootScope) {
+app.controller("ListController", function($scope, $routeParams, ListService, $rootScope, $modal) {
   var root = $scope;
 
   // place to store incoming list data
@@ -92,7 +92,9 @@ app.controller("ListController", function($scope, $routeParams, ListService, $ro
         f.amt = f.amt || 1;
 
         // add to list
-        list.contents.push(f);
+        list.contents.push(
+          $.extend(true, {}, f)
+        );
       });
 
       // lastly, update the backend

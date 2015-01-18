@@ -26,15 +26,16 @@
       <li class="list-group-item" ng-repeat="cnt in l.contents">
         {{cnt.name}} <small>{{cnt.tags.join(", ")}}</small>
 
-        <!-- delete button -->
-        <button
-          class="btn btn-danger btn-xs pull-right"
-          ng-click="delFromList(l, cnt.name)"
-          >Delete
-        </button>
-
         <!-- only for foodstuffs -->
         <span ng-hide="cnt.contents">
+
+          <!-- delete button -->
+          <button
+            class="btn btn-danger btn-xs pull-right"
+            ng-click="delFromList(l, cnt.name)"
+            >Delete
+          </button>
+
           <!-- item price -->
           <input
             type="text"
@@ -65,6 +66,7 @@
             disabled
             ng-value="totalList(cnt).price"
             placeholder="Price"
+            style="margin-right: 53px;"
           />
 
           <span class="pull-right at-sign">@</span>
@@ -77,6 +79,20 @@
             ng-change="updateList(l)"
             placeholder="Quantity"
           />
+
+          <!-- show list contents -->
+          <ul class="list-group" style="margin-top: 20px;">
+            <li class="list-group-item" ng-repeat="listitem in cnt.contents">
+              {{listitem.name}}
+              <button
+                class="btn btn-danger btn-xs pull-right"
+                ng-click="cnt.contents.splice($index, 1); cnt.contents.length || delFromList(l, cnt.name); updateList(l);"
+                >Delete
+              </button>
+            </li>
+          </ul>
+
+
         </span>
 
       </li>
