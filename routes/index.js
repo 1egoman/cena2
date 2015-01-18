@@ -1,6 +1,7 @@
 
 // models
 var List = require("../models/list");
+var Foodstuff = require("../models/foodstuff");
 
 // create CRUD operations for the model
 createCRUD = function(app, Model, name) {
@@ -58,5 +59,8 @@ module.exports = function(app) {
 
   // create CRUD resource for list
   createCRUD(app, List, "list");
+
+  // create CRUD resource for foodstuff
+  createCRUD(app, Foodstuff, "foodstuff");
 
 };

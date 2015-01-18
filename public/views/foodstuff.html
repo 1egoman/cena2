@@ -1,0 +1,47 @@
+<div ng-controller="FsController">
+
+  <!-- display each list -->
+  <div class="list panel panel-default">
+    <div class="panel-heading">
+      Foodstuffs
+    </div>
+
+    <div class="panel-body">
+      <div class="input-group">
+        <label>Name</label>
+        <input type="text" class="form-control" ng-model="newFs.name" />
+      </div>
+
+      <div class="input-group">
+        <label>Description</label>
+        <input type="text" class="form-control" ng-model="newFs.desc" />
+      </div>
+
+      <div class="input-group">
+        <label>Price</label>
+        <input type="text" class="form-control" ng-model="newFs.price" />
+      </div>
+
+      <div class="input-group">
+        <label>Space-seperated tags</label>
+        <input type="text" class="form-control" ng-model="newFs.pretags" />
+      </div>
+
+      <div class="input-group">
+        <button class="btn btn-primary" ng-click="addFs(newFs)">Add Foodstuff</button>
+      </div>
+    </div>
+
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        ng-repeat="l in foodstuffs"
+        tooltip-placement="left"
+        tooltip="Tags: {{l.tags.join(', ')}}"
+        >
+        {{l.name}} <small>{{l.price | currency}}</small>
+      </li>
+    </ul>
+  </div>
+
+</div>
