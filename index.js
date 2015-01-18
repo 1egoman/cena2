@@ -31,4 +31,4 @@ app.get("/", function(req, res) {
 routes(app);
 
 app.listen(process.env.PORT || 8000);
-console.log("-> :8000")
+console.log("-> :%d", process.env.PORT || 8000)
