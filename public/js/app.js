@@ -28,6 +28,9 @@ app.config(['$routeProvider',
         templateUrl: 'views/lists.html',
         controller: 'ListController'
       }).
+      when('/readme', {
+        templateUrl: 'views/readme.html'
+      }).
       otherwise({
         redirectTo: '/lists'
       });
