@@ -240,6 +240,17 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
     });
   };
 
+  // add new list
+  root.delFs = function(fs) {
+    FoodStuffService.remove({name: fs.name}, function(data) {
+      // update all foodstuff instances
+      FoodStuffService.get(function(all) {
+        $rootScope.$emit("fsUpdate", all);
+      });
+    });
+  };
+
+
   // force a list update
   root.updateFs = function(list) {
     FoodStuffService.update(list);
@@ -272,6 +283,17 @@ app.factory("FoodStuffService", function($http) {
         cb && cb(data);
       });
     },
+
+    remove: function(list, cb) {
+      $http({
+        method: "delete",
+        url: "/foodstuffs/"+list.name,
+        data: angular.toJson(list)
+      }).success(function(data) {
+        cb && cb(data);
+      });
+    },
+
 
     update: function(list, cb) {
       $http({

@@ -40,6 +40,14 @@
         tooltip="Tags: {{l.tags.join(', ')}}"
         >
         {{l.name}} <small>{{l.price | currency}}</small>
+
+        <!-- delete button -->
+        <button
+          class="btn btn-danger btn-xs pull-right"
+          ng-click="delFs(l)"
+          >Delete
+        </button>
+
       </li>
     </ul>
   </div>
