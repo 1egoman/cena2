@@ -28,43 +28,29 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
     root.DispLists = _.filter(root.lists, function(list) {
       return list.name == $routeParams.list;
     });
-  });
-  // root.lists = [
-  //   {
-  //     name: "List One",
-  //     desc: "Desc 1",
-  //     tags: ["one", "two", "three"],
-  //     contents: [
-  //       {
-  //         name: "Foodstuff 1",
-  //         tags: ["food", "stuff", "one"]
-  //       },
-  //       {
-  //         name: "Foodstuff 1",
-  //         tags: ["food", "stuff", "one"]
-  //       }
-  //     ]
-  //   }
-  // ];
 
-  // foodstuffs
-  root.foodstuffs = [
-    {
-      name: "Bread",
-      price: 5.50,
-      tags: ["abc"]
-    },
-    {
-      name: "Milk",
-      price: 1.00,
-      tags: ["abc"]
-    },
-    {
-      name: "Cheese",
-      price: 0.24,
-      tags: ["abc"]
-    }
-  ];
+    // if we got nothing, display all
+    if (root.DispLists.length === 0) root.DispLists = all;
+
+    // next, the foodstuffs
+    root.foodstuffs = [
+      {
+        name: "Bread",
+        price: 5.50,
+        tags: ["abc"]
+      },
+      {
+        name: "Milk",
+        price: 1.00,
+        tags: ["abc"]
+      },
+      {
+        name: "Cheese",
+        price: 0.24,
+        tags: ["abc"]
+      }
+    ];
+  });
 
   // add a new item to list
   root.addToList = function(list, item) {
@@ -79,6 +65,12 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
 
       // update each list
       _.each(fs, function(f) {
+
+        // make sure these are set
+        f.price = f.price || '0.00';
+        f.amt = f.amt || 1;
+
+        // add to list
         list.contents.push(f);
       });
 
@@ -112,6 +104,16 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
   root.updateList = function(list) {
     ListService.update(list);
   };
+
+  // get items for typeahead
+  root.getTypeahead = function(list) {
+    return _.union(root.foodstuffs,
+      _.filter(root.lists, function(lst) {
+        return lst.name !== list.name;
+      })
+    );
+  };
+
 });
 
 app.factory("ListService", function($http) {

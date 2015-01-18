@@ -1,5 +1,6 @@
 <div ng-controller="ListController">
 
+  <!-- display each list -->
   <div class="list panel panel-default" ng-repeat="l in DispLists">
     <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
       {{l.name}} <small>{{l.desc}}</small>
@@ -10,7 +11,7 @@
         <input
           type="text"
           ng-model="foodstuff"
-          typeahead="fs.name for fs in foodstuffs | filter:$viewValue | limitTo:8"
+          typeahead="fs.name for fs in getTypeahead(l) | filter:$viewValue | limitTo:8"
           class="form-control"
           placeholder="Add new item to list"
         />
@@ -35,13 +36,13 @@
         <!-- item price -->
         <input
           type="text"
-          class="form-control pull-right form-control-xs quantity"
+          class="form-control pull-right form-control-xs price"
           ng-model="cnt.price"
           ng-change="updateList(l)"
           placeholder="Price"
         />
 
-        <span class="pull-right">@</span>
+        <span class="pull-right at-sign">@</span>
 
         <!-- item quantity -->
         <input

@@ -6177,3 +6177,16 @@ button.close {
   margin: 0px 5px;
   width: 100px;
 }
+.price {
+  margin: 0px 5px 0px 0px;
+  width: 100px;
+}
+.at-sign::after {
+  content: "$";
+  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  padding-left: 2px;
+  padding-right: 1px;
+}
