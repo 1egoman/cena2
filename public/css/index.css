@@ -6216,3 +6216,7 @@ button.close {
   content: "[GF]";
   color: #fc4b4b;
 }
+.list-maggie .panel-heading::before {
+  content: "[MG]";
+  color: #F0F;
+}

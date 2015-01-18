@@ -169,9 +169,9 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   root.totalList = function(list) {
     totalPrice = _.reduce(list.contents, function(prev, l) {
       if (l.contents) {
-        return prev + root.totalList(l).price;
+        return prev + l.amt * root.totalList(l).price;
       } else {
-        return prev + parseFloat(l.price);
+        return prev + l.amt * parseFloat(l.price);
       };
     }, 0);
 
