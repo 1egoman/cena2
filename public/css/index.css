@@ -6216,6 +6216,10 @@ button.close {
   content: "[GF]";
   color: #fc4b4b;
 }
+.list-veggie .panel-heading::before {
+  content: "[V]";
+  color: green;
+}
 .list-maggie .panel-heading::before {
   content: "[MG]";
   color: #F0F;
