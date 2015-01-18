@@ -33,25 +33,52 @@
           >Delete
         </button>
 
-        <!-- item price -->
-        <input
-          type="text"
-          class="form-control pull-right form-control-xs price"
-          ng-model="cnt.price"
-          ng-change="updateList(l)"
-          placeholder="Price"
-        />
+        <!-- only for foodstuffs -->
+        <span ng-hide="cnt.contents">
+          <!-- item price -->
+          <input
+            type="text"
+            class="form-control pull-right form-control-xs price"
+            ng-model="cnt.price"
+            ng-change="updateList(l)"
+            placeholder="Price"
+          />
 
-        <span class="pull-right at-sign">@</span>
+          <span class="pull-right at-sign">@</span>
 
-        <!-- item quantity -->
-        <input
-          type="number"
-          class="form-control pull-right form-control-xs quantity"
-          ng-model="cnt.amt"
-          ng-change="updateList(l)"
-          placeholder="Quantity"
-        />
+          <!-- item quantity -->
+          <input
+            type="number"
+            class="form-control pull-right form-control-xs quantity"
+            ng-model="cnt.amt"
+            ng-change="updateList(l)"
+            placeholder="Quantity"
+          />
+        </span>
+
+        <!-- for other lists -->
+        <span ng-show="cnt.contents">
+          <!-- item price -->
+          <input
+            type="text"
+            class="form-control pull-right form-control-xs price"
+            disabled
+            ng-value="totalList(cnt).price"
+            placeholder="Price"
+          />
+
+          <span class="pull-right at-sign">@</span>
+
+          <!-- item quantity -->
+          <input
+            type="number"
+            class="form-control pull-right form-control-xs quantity"
+            ng-model="cnt.amt"
+            ng-change="updateList(l)"
+            placeholder="Quantity"
+          />
+        </span>
+
       </li>
     </ul>
   </div>

@@ -8,6 +8,10 @@ app.config(['$routeProvider',
         templateUrl: 'views/lists.html',
         controller: 'ListController'
       }).
+      when('/addlist', {
+        templateUrl: 'views/addlist.html',
+        controller: 'ListController'
+      }).
       when('/lists/:list', {
         templateUrl: 'views/lists.html',
         controller: 'ListController'
@@ -18,8 +22,11 @@ app.config(['$routeProvider',
   }
 ]);
 
-app.controller("ListController", function($scope, $routeParams, ListService) {
+app.controller("ListController", function($scope, $routeParams, ListService, $rootScope) {
   var root = $scope;
+
+  // place to store incoming list data
+  root.newList = {};
 
   ListService.get(function(all) {
     root.lists = all;
@@ -52,14 +59,28 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
     ];
   });
 
+  // add new list
+  root.addList = function(list) {
+    // tags
+    list.tags = list.tags || list.pretags.split(" ");
+    ListService.add(list, function(data) {
+
+      // update all list instances
+      ListService.get(function(all) {
+        $rootScope.$emit("listUpdate", all);
+      });
+
+    });
+  };
+
   // add a new item to list
   root.addToList = function(list, item) {
-    _.each(_.filter(root.lists, function(list) {
-      return list.name == list.name;
+    _.each(_.filter(root.lists, function(l) {
+      return l.name == list.name;
     }), function(list) {
 
-      // find the foodstuff we want
-      fs = _.filter(root.foodstuffs, function(s) {
+      // find the item we want
+      fs = _.filter(root.getTypeahead(list), function(s) {
         return s.name == item;
       });
 
@@ -67,7 +88,7 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
       _.each(fs, function(f) {
 
         // make sure these are set
-        f.price = f.price || '0.00';
+        if (!f.contents) f.price = f.price || '0.00';
         f.amt = f.amt || 1;
 
         // add to list
@@ -81,8 +102,8 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
 
   // delete a new item from list
   root.delFromList = function(list, item) {
-    _.each(_.filter(root.lists, function(list) {
-      return list.name == list.name;
+    _.each(_.filter(root.lists, function(l) {
+      return l.name == list.name;
     }), function(list) {
 
       // find the foodstuff we want
@@ -114,6 +135,21 @@ app.controller("ListController", function($scope, $routeParams, ListService) {
     );
   };
 
+  // get total stuff about list
+  root.totalList = function(list) {
+    totalPrice = _.reduce(list.contents, function(prev, l) {
+      console.log(l.price)
+      return prev + parseFloat(l.price);
+    }, 0);
+
+    return {price: totalPrice}
+  };
+
+  // update all list instances
+  $rootScope.$on("listUpdate", function(data) {
+    root.lists = data;
+  });
+
 });
 
 app.factory("ListService", function($http) {
@@ -127,13 +163,22 @@ app.factory("ListService", function($http) {
       });
     },
 
+    add: function(list, cb) {
+      $http({
+        method: "post",
+        url: "/lists",
+        data: angular.toJson(list)
+      }).success(function(data) {
+        cb && cb(data);
+      });
+    },
+
     update: function(list, cb) {
       $http({
         method: "put",
         url: "/lists/"+list.name,
         data: angular.toJson(list)
       }).success(function(data) {
-        console.log(data)
         cb && cb(data);
       });
     }
