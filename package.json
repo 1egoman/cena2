@@ -1,0 +1,17 @@
+{
+  "name": "cena",
+  "version": "0.0.0",
+  "description": "Grocery-list management app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Gaus <rsg1egoman@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "express": "^4.11.0",
+    "express-static": "^1.0.3",
+    "mongoose": "^3.8.21"
+  }
+}
