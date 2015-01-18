@@ -138,8 +138,11 @@ app.controller("ListController", function($scope, $routeParams, ListService, $ro
   // get total stuff about list
   root.totalList = function(list) {
     totalPrice = _.reduce(list.contents, function(prev, l) {
-      console.log(l.price)
-      return prev + parseFloat(l.price);
+      if (l.contents) {
+        return prev + root.totalList(l).price;
+      } else {
+        return prev + parseFloat(l.price);
+      };
     }, 0);
 
     return {price: totalPrice}
