@@ -1,9 +1,19 @@
 <div ng-controller="ListController">
 
+  <input
+    type="text"
+    typeahead="l.name for l in DispLists | filter:$viewValue | limitTo:8"
+    class="form-control"
+    ng-model="listSearchString"
+    placeholder="Search Lists"
+  />
+  <br/>
+
   <!-- display each list -->
   <div
     class="list panel panel-default {{ 'list-' + l.tags.join(' list-') }}"
     ng-repeat="l in DispLists"
+    ng-show="matchesSearchString(l, listSearchString)"
   >
     <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
       {{l.name}} <small>{{l.desc}}</small>

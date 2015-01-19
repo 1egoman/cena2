@@ -44,6 +44,9 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   root.newList = {};
   root.printableList = {};
 
+  // search string for list
+  root.listSearchString = "";
+
   ListService.get(function(all) {
     root.lists = all;
 
@@ -74,12 +77,36 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     //   }
     // ];
     FoodStuffService.get(function(all) {
-      console.log(all)
       root.foodstuffs = all;
     });
 
     root.doPrintableList();
   });
+
+  // list fuzzy searching
+  root.matchesSearchString = function(list, filter) {
+    // if there's no filter, return true
+    if (!filter || filter.indexOf(" ") === -1) return true;
+
+    // make filter lowercase
+    filter = filter.toLowerCase();
+
+    // create a corpus of the important parts of each list item
+    corpus = _.compact(_.map(["name", "desc", "tags"], function(key) {
+      return JSON.stringify(list[key]);
+    }).join(" ").toLowerCase().split(/[ ,\[\]"]/gi));
+
+    // how many matching words are there between the corpus
+    // and the filter string?
+    score = _.intersection(
+      corpus,
+      filter.split(' ')
+    ).length;
+
+    console.log(list.name, score);
+    console.log(corpus, filter.split(' '))
+    return score > 0;
+  };
 
   // add new list
   root.addList = function(list) {
@@ -214,7 +241,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   root.doPrintableList = function() {
     _.each(root.lists, function(l) {
       root.printableList[l.name] = root.sortByTag(l);
-      console.log(root.printableList);
+      // console.log(root.printableList);
     });
   };
 
