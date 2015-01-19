@@ -37,6 +37,15 @@ app.config(['$routeProvider',
   }
 ]);
 
+// reverse filter (reverse the displayed list)
+app.filter('reverse', function() {
+  return function(items) {
+    if (typeof items == "object") {
+      return items.slice().reverse();
+    } else return [];
+  };
+});
+
 app.controller("ListController", function($scope, $routeParams, ListService, FoodStuffService, $rootScope, $location) {
   var root = $scope;
 

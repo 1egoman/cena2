@@ -35,7 +35,7 @@
     <ul class="list-group">
       <li
         class="list-group-item"
-        ng-repeat="l in foodstuffs"
+        ng-repeat="l in foodstuffs | reverse"
         tooltip-placement="left"
         tooltip="Tags: {{l.tags.join(', ')}}"
         >
