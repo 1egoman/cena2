@@ -350,6 +350,12 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
     });
   };
 
+  // update a foodstuff price / tags
+  root.modifyFs = function(list, pretags) {
+    list.tags = pretags.split(" "); // format tags
+    root.updateFs(list); // update list on backend
+    $("#edit-foodstuff-"+list._id).modal('hide'); // close modal
+  };
 
   // force a list update
   root.updateFs = function(list) {
