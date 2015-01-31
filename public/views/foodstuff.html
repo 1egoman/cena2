@@ -64,12 +64,22 @@
                 <h4 class="modal-title">Editing '{{l.name}}'</h4>
               </div>
               <div class="modal-body">
+
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" ng-model="l.desc" />
+                </div>
+
                 <div class="form-group">
                   <label>Price</label>
                   <input type="text" class="form-control" ng-model="l.price" />
+                </div>
+
+                <div class="form-group">
                   <label>Space-seperated Tags</label>
                   <input type="text" class="form-control" ng-model="pretags" ng-init="pretags = l.tags.join(' ')"/>
                 </div>
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
