@@ -43,7 +43,7 @@
 
     <!-- each item on the list -->
     <ul class="list-group">
-      <li class="list-group-item" ng-repeat="cnt in l.contents">
+      <li class="list-group-item" ng-repeat="cnt in l.contents | reverse">
         {{cnt.name}} <small>{{cnt.tags.join(", ")}}</small>
 
         <!-- only for foodstuffs -->
