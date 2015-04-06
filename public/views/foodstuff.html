@@ -3,10 +3,24 @@
   <!-- display each list -->
   <div class="list panel panel-default">
     <div class="panel-heading">
-      Foodstuffs
+      Add Foodstuff
+
+      <!-- show hide add foodstuffs -->
+      <span
+        class="glyphicon glyphicon-chevron-up pull-right"
+        ng-hide="foodstuffhidden"
+        ng-click="foodstuffhidden = true"
+        style="cursor: pointer;"
+      ></span>
+      <span
+        class="glyphicon glyphicon-chevron-down pull-right"
+        ng-show="foodstuffhidden"
+        ng-click="foodstuffhidden = false"
+        style="cursor: pointer;"
+      ></span>
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body" ng-hide="foodstuffhidden">
       <div class="input-group">
         <label>Name</label>
         <input type="text" class="form-control" ng-model="newFs.name" />
@@ -79,6 +93,9 @@
         <button class="btn btn-primary" ng-click="addFs(newFs)">Add Foodstuff</button>
       </div>
     </div>
+
+  </div>
+  <div class="list panel panel-default">
 
     <ul class="list-group">
       <li
