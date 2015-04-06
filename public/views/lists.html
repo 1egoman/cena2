@@ -48,7 +48,7 @@
         <!-- checkbox, title and desc -->
         <!-- less than sm version -->
         <p class="visible-md-inline visible-lg-inline">
-          <span class="checkboxes">
+          <span class="checkboxes" ng-hide="cnt.contents">
             <span
               class="glyphicon glyphicon-unchecked disabled"
               style="margin-right: 10px; cursor: pointer;"
@@ -67,7 +67,7 @@
 
         <!-- greater than md version -->
         <span class="visible-sm-inline visible-xs-inline">
-          <span class="checkboxes">
+          <span class="checkboxes" ng-hide="cnt.contents">
             <span
               class="glyphicon glyphicon-unchecked disabled"
               style="margin-right: 10px; cursor: pointer;"
@@ -122,7 +122,7 @@
             type="text"
             class="form-control pull-right form-control-xs price"
             disabled
-            ng-value="totalList(cnt).price"
+            ng-value="totalList(cnt).price | currency:''"
             placeholder="Price"
             style="margin-right: 53px;"
           />
@@ -141,7 +141,24 @@
           <!-- show list contents -->
           <ul class="list-group" style="margin-top: 20px;">
             <li class="list-group-item" ng-repeat="listitem in cnt.contents">
+
+              <span class="checkboxes">
+                <span
+                  class="glyphicon glyphicon-unchecked disabled"
+                  style="margin-right: 10px; cursor: pointer;"
+                  ng-click="listitem.checked = true; updateList(l);"
+                  ng-hide="listitem.checked">
+                </span>
+                <span
+                  class="glyphicon glyphicon-check text-primary"
+                  style="margin-right: 10px; cursor: pointer;"
+                  ng-click="listitem.checked = false; updateList(l);"
+                  ng-show="listitem.checked">
+                </span>
+              </span>
+
               {{listitem.name}}
+
               <button
                 class="btn btn-danger btn-xs pull-right"
                 ng-click="cnt.contents.splice($index, 1); cnt.contents.length || delFromList(l, cnt.name); updateList(l);"
