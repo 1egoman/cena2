@@ -6168,6 +6168,13 @@ button.close {
     display: none !important;
   }
 }
+.glyphicon.disabled {
+  color: #777777;
+}
+span.checkboxes span {
+  vertical-align: middle;
+  font-size: 16.8px;
+}
 .list small {
   color: #777777;
   margin-left: 4px;
@@ -6214,6 +6221,12 @@ button.close {
 }
 .printable-list h4 {
   font-size: 11.2px;
+}
+span.checkboxes {
+  display: none;
+}
+.list-grocery span.checkboxes {
+  display: inline;
 }
 .list-recipe {
   border-color: #bce8f1;

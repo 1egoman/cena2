@@ -44,6 +44,23 @@
     <!-- each item on the list -->
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="cnt in l.contents | reverse">
+        <!-- checkbox -->
+        <span class="checkboxes">
+          <span
+            class="glyphicon glyphicon-unchecked disabled"
+            style="margin-right: 10px; cursor: pointer;"
+            ng-click="cnt.checked = true; updateList(l);"
+            ng-hide="cnt.checked">
+          </span>
+          <span
+            class="glyphicon glyphicon-check text-primary"
+            style="margin-right: 10px; cursor: pointer;"
+            ng-click="cnt.checked = false; updateList(l);"
+            ng-show="cnt.checked">
+          </span>
+        </span>
+
+        <!-- title and desc -->
         {{cnt.name}} <small>{{cnt.tags.join(", ")}}</small>
 
         <!-- only for foodstuffs -->

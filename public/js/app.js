@@ -112,8 +112,8 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
       filter.split(' ')
     ).length;
 
-    console.log(list.name, score);
-    console.log(corpus, filter.split(' '))
+    // console.log(list.name, score);
+    // console.log(corpus, filter.split(' '))
     return score > 0;
   };
 
@@ -160,6 +160,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
         // make sure these are set
         if (!f.contents) f.price = f.price || '0.00';
         f.amt = f.amt || 1;
+        f.checked = false;
 
         // add to list
         list.contents.push(

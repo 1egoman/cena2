@@ -6,6 +6,15 @@
   .hidden-print;
 }
 
+.glyphicon.disabled {
+  color: @gray-light;
+}
+
+span.checkboxes span {
+  vertical-align: middle;
+  font-size: @font-size-base * 1.2;
+}
+
 .list small {
   color: @gray-light;
   margin-left: 4px;
@@ -67,6 +76,14 @@
 }
 
 // special tags
+
+// a grocery list
+span.checkboxes { display: none; }
+.list-grocery span.checkboxes {
+  display: inline;
+}
+
+// a recipe
 .list-recipe { .panel-info; }
 
 // gluten free
