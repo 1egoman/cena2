@@ -6175,6 +6175,14 @@ span.checkboxes span {
   vertical-align: middle;
   font-size: 16.8px;
 }
+ul.list-group .list-group-item {
+  height: 64px;
+}
+@media (min-width: 768px) {
+  ul.list-group .list-group-item {
+    height: auto;
+  }
+}
 .list small {
   color: #777777;
   margin-left: 4px;

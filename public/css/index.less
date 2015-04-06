@@ -15,6 +15,16 @@ span.checkboxes span {
   font-size: @font-size-base * 1.2;
 }
 
+// adjust list group height larger on mobile
+ul.list-group .list-group-item {
+  height: 64px;
+}
+@media (min-width: @screen-sm-min) {
+  ul.list-group .list-group-item {
+    height: auto;
+  }
+}
+
 .list small {
   color: @gray-light;
   margin-left: 4px;
