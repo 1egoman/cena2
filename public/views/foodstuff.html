@@ -97,12 +97,24 @@
   </div>
   <div class="list panel panel-default">
 
+    <!-- foodstuffs search box -->
+    <div class="panel-body">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search Foodstuffs"
+        ng-model="foodstuffs_search"
+        typeahead="l.name for l in foodstuffs | filter:$viewValue | limitTo:8"
+       />
+    </div>
+
     <ul class="list-group">
       <li
         class="list-group-item"
         ng-repeat="l in foodstuffs | reverse"
         tooltip-placement="left"
         tooltip="Tags: {{l.tags.join(', ')}}"
+        ng-show="matchesSearchString(l, foodstuffs_search)"
         >
         {{l.name}} <small>{{l.price | currency}}</small>
 

@@ -95,7 +95,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   // list fuzzy searching
   root.matchesSearchString = function(list, filter) {
     // if there's no filter, return true
-    if (!filter || filter.indexOf(" ") === -1) return true;
+    if (!filter) return true;
 
     // make filter lowercase
     filter = filter.toLowerCase();
@@ -103,7 +103,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     // create a corpus of the important parts of each list item
     corpus = _.compact(_.map(["name", "desc", "tags"], function(key) {
       return JSON.stringify(list[key]);
-    }).join(" ").toLowerCase().split(/[ ,\[\]"]/gi));
+    }).join(" ").toLowerCase().split(/[ ,\[\]"-]/gi));
 
     // how many matching words are there between the corpus
     // and the filter string?
@@ -333,6 +333,9 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
   // place to store incoming list data
   root.newFs = {};
 
+  // foodstuff drawer
+  root.foodstuffhidden = true
+
   FoodStuffService.get(function(all) {
     root.foodstuffs = all;
   });
@@ -388,6 +391,31 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
     root.newFs.pretags = (root.newFs.pretags || "") + " " + tag;
     root.newFs.pretags = root.newFs.pretags.trim()
     $("input#fs-tags").focus();
+  };
+
+  // list fuzzy searching
+  root.matchesSearchString = function(list, filter) {
+    // if there's no filter, return true
+    if (!filter) return true;
+
+    // make filter lowercase
+    filter = filter.toLowerCase();
+
+    // create a corpus of the important parts of each list item
+    corpus = _.compact(_.map(["name", "desc", "tags"], function(key) {
+      return JSON.stringify(list[key]);
+    }).join(" ").toLowerCase().split(/[ ,\[\]"-]/gi));
+
+    // how many matching words are there between the corpus
+    // and the filter string?
+    score = _.intersection(
+      corpus,
+      filter.split(' ')
+    ).length;
+
+    // console.log(list.name, score);
+    // console.log(corpus, filter.split(' '))
+    return score > 0;
   };
 
 });
