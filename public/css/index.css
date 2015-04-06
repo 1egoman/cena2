@@ -6199,6 +6199,16 @@ button.close {
   padding: 5px;
   width: 100%;
 }
+.input-group.tag-buttons ul {
+  padding-left: 0px;
+}
+.input-group.tag-buttons li {
+  list-style-type: none;
+  display: inline;
+}
+.input-group.tag-buttons li button {
+  margin: 2px 0px;
+}
 .printable-list {
   font-size: 9.8px;
 }
@@ -6234,4 +6244,12 @@ button.close {
 .list-maggie .panel-heading::before {
   content: "[MG]";
   color: #F0F;
+}
+.list-ryan .panel-heading::before {
+  content: "[RY]";
+  color: #71C837;
+}
+.list-bob .panel-heading::before {
+  content: "[B]";
+  color: #36b8c7;
 }

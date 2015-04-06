@@ -254,6 +254,13 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     });
   };
 
+  // add the tag, and delimit it with spaces
+  root.addTagToNewList = function(tag) {
+    root.newList.pretags = (root.newList.pretags || "") + " " + tag;
+    root.newList.pretags = root.newList.pretags.trim()
+    $("input#list-tags").focus();
+  };
+
   // update all list instances
   $rootScope.$on("listUpdate", function(status, data) {
     root.lists = data;
@@ -375,6 +382,13 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
   $rootScope.$on("fsUpdate", function(status, data) {
     root.foodstuffs = data;
   });
+
+  // add the tag, and delimit it with spaces
+  root.addTagToNewFoodstuff = function(tag) {
+    root.newFs.pretags = (root.newFs.pretags || "") + " " + tag;
+    root.newFs.pretags = root.newFs.pretags.trim()
+    $("input#fs-tags").focus();
+  };
 
 });
 

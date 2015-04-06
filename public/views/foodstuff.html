@@ -24,7 +24,55 @@
 
       <div class="input-group">
         <label>Space-seperated tags</label>
-        <input type="text" class="form-control" ng-model="newFs.pretags" />
+        <input type="text" class="form-control" id="fs-tags" ng-model="newFs.pretags" />
+      </div>
+
+      <!-- foodstuff tag buttons -->
+      <div class="input-group tag-buttons">
+        <ul>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-a-produce")' class="btn btn-xs btn-primary">sort-a-produce</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-b-bakery")' class="btn btn-xs btn-primary">sort-b-bakery</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-c-deli")' class="btn btn-xs btn-primary">sort-c-deli</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-d-nature")' class="btn btn-xs btn-primary">sort-d-nature</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-e-meat")' class="btn btn-xs btn-primary">sort-e-meat</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-f-toiletries")' class="btn btn-xs btn-primary">sort-f-toiletries</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-g-dairy")' class="btn btn-xs btn-primary">sort-g-dairy</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-h-beverage")' class="btn btn-xs btn-primary">sort-h-beverage</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-i-grocery")' class="btn btn-xs btn-primary">sort-i-grocery</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-j-household")' class="btn btn-xs btn-primary">sort-j-household</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-k-bulk")' class="btn btn-xs btn-primary">sort-k-bulk</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-l-paper")' class="btn btn-xs btn-primary">sort-l-paper</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-m-frozen")' class="btn btn-xs btn-primary">sort-m-frozen</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewFoodstuff("sort-n-misc")' class="btn btn-xs btn-primary">sort-n-misc</button>
+          </li>
+        </ul>
       </div>
 
       <div class="input-group">

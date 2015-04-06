@@ -20,10 +20,31 @@
 
       <div class="input-group">
         <label>Space-seperated tags</label>
-        <input type="text" class="form-control" ng-model="newList.pretags" />
-        <div>
-          Try some of these tags: <code>recipe</code> or <code>no-gluten</code>.
-        </div>
+        <input type="text" class="form-control" id="list-tags" ng-model="newList.pretags" />
+      </div>
+
+      <!-- list tag buttons -->
+      <div class="input-group tag-buttons">
+        <ul>
+          <li>
+            <button ng-click='addTagToNewList("recipe")' class="btn btn-xs btn-info">recipe</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewList("no-gluten")' class="btn btn-xs btn-danger">no-gluten</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewList("veg")' class="btn btn-xs btn-success">veg</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewList("maggie")' class="btn btn-xs btn-warning" style="background: #F0F;">maggie</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewList("ryan")' class="btn btn-xs btn-success" style="background: #71C837;">ryan</button>
+          </li>
+          <li>
+            <button ng-click='addTagToNewList("bob")' class="btn btn-xs btn-info" style="background: #36b8c7;">bob</button>
+          </li>
+        </ul>
       </div>
 
       <div class="input-group">

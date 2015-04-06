@@ -46,6 +46,18 @@
 .input-group {
   padding: 5px;
   width: 100%;
+
+  // buttons to quickly add tags
+  &.tag-buttons {
+    ul { padding-left: 0px; }
+    li {
+      list-style-type: none;
+      display: inline;
+      button {
+        margin: 2px 0px;
+      }
+    }
+  }
 }
 
 // for printable list
@@ -73,4 +85,16 @@
 .list-maggie .panel-heading::before {
   content: "[MG]";
   color: #F0F;
+}
+
+// I'll eat it
+.list-ryan .panel-heading::before {
+  content: "[RY]";
+  color: #71C837;
+}
+
+// my dad will eat it
+.list-bob .panel-heading::before {
+  content: "[B]";
+  color: #36b8c7;
 }
