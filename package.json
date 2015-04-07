@@ -12,6 +12,7 @@
     "body-parser": "^1.10.1",
     "express": "^4.11.0",
     "express-static": "^1.0.3",
-    "mongoose": "^3.8.21"
+    "mongoose": "^3.8.21",
+    "node-sass-middleware": "^0.5.0"
   }
 }

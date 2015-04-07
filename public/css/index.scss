@@ -1,32 +1,30 @@
-// out: index.css
-// cena2 stylesheet
-@import "../bootstrap/less/bootstrap.less";
+@import "../bootstrap/sass/bootstrap";
 
 .list {
-  .hidden-print;
+  @extend .hidden-print;
 }
 
 .glyphicon.disabled {
-  color: @gray-light;
+  color: $gray-light;
 }
 
 span.checkboxes span {
   vertical-align: middle;
-  font-size: @font-size-base * 1.2;
+  font-size: $font-size-base * 1.2;
 }
 
 // adjust list group height larger on mobile
 ul.list-group .list-group-item {
   height: 64px;
 }
-@media (min-width: @screen-sm-min) {
+@media (min-width: $screen-sm-min) {
   ul.list-group .list-group-item {
     height: auto;
   }
 }
 
 .list small {
-  color: @gray-light;
+  color: $gray-light;
   margin-left: 4px;
 }
 
@@ -81,8 +79,8 @@ ul.list-group .list-group-item {
 
 // for printable list
 .printable-list {
-  font-size: @font-size-base * .7;
-  h4 { font-size: @font-size-base * .8; }
+  font-size: $font-size-base * .7;
+  h4 { font-size: $font-size-base * .8; }
 }
 
 // special tags
@@ -94,12 +92,12 @@ span.checkboxes { display: none; }
 }
 
 // a recipe
-.list-recipe { .panel-info; }
+.list-recipe { @extend .panel-info; }
 
 // gluten free
 .list-no-gluten .panel-heading::before {
   content: "[GF]";
-  color: @brand-danger;
+  color: $brand-danger;
 }
 
 // veggitarian

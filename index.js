@@ -19,6 +19,14 @@ mongoose.connection.once('open', function() {
 // parse JSON out of each request body
 app.use(bodyParser.json());
 
+// sass compiler
+app.use(require("node-sass-middleware")({
+  src: __dirname + '/public',
+  dest: __dirname + '/public',
+  debug: true,
+  outputStyle: 'compressed'
+}));
+
 // the frontend
 app.use(static(__dirname + '/public'));
 
