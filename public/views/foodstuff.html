@@ -2,21 +2,17 @@
 
   <!-- display each list -->
   <div class="list panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading" style="cursor: pointer;" ng-click="foodstuffhidden = !foodstuffhidden">
       Add Foodstuff
 
       <!-- show hide add foodstuffs -->
       <span
         class="glyphicon glyphicon-chevron-up pull-right"
         ng-hide="foodstuffhidden"
-        ng-click="foodstuffhidden = true"
-        style="cursor: pointer;"
       ></span>
       <span
         class="glyphicon glyphicon-chevron-down pull-right"
         ng-show="foodstuffhidden"
-        ng-click="foodstuffhidden = false"
-        style="cursor: pointer;"
       ></span>
     </div>
 
