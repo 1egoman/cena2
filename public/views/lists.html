@@ -9,6 +9,9 @@
   />
   <br/>
 
+  <!-- loading icon -->
+  <span ng-hide="DispLists.length" class="glyphicon glyphicon-refresh spinning loading"></span>
+
   <!-- display each list -->
   <div
     class="list panel panel-default {{ 'list-' + l.tags.join(' list-') }}"

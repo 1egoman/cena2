@@ -1,0 +1,25 @@
+.navbar-default {
+  background: white;
+  border-bottom: 1px solid #C7C7C7;
+  border-radius: 0px;
+
+  .navbar-brand > img {
+    height: 32px;
+    display: inline;
+    margin-right: 4px;
+    margin-top: -4px;
+  }
+
+  .navbar-nav > li > a, .navbar-brand {
+    padding: 26px;
+    font-size: $font-size-base * 1.3;
+
+    .caret {
+      border-top: 6px dashed;
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+      margin-left: 4px;
+    }
+
+  }
+}
