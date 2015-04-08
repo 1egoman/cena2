@@ -1,4 +1,13 @@
+@import url(http://fonts.googleapis.com/css?family=Dosis);
 @import "../bootstrap/sass/bootstrap";
+
+@import "panel";
+@import "navbar";
+
+body {
+  background: $gray-lighter;
+  font-weight: 300;
+}
 
 .list {
   @extend .hidden-print;
