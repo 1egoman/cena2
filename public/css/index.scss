@@ -117,7 +117,12 @@ ul.list-group .list-group-item {
   h4 { font-size: $font-size-base * .8; }
 }
 
-// special tags
+// navbar dropdown lists
+.dropdown-menu {
+  @extend .panel;
+}
+
+// == special tags ==
 
 // a grocery list
 span.checkboxes { display: none; }
