@@ -12,6 +12,10 @@ app.config(['$routeProvider',
         templateUrl: 'views/addlist.html',
         controller: 'ListController'
       }).
+      when('/addlist/:type', {
+        templateUrl: 'views/addlist.html',
+        controller: 'ListController'
+      }).
       when('/lists/:list', {
         templateUrl: 'views/lists.html',
         controller: 'ListController'
@@ -50,7 +54,9 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   var root = $scope;
 
   // place to store incoming list data
-  root.newList = {};
+  root.newList = {
+    pretags: $routeParams.type || ""
+  };
   root.printableList = {};
 
   // search string for list
