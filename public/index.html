@@ -30,12 +30,12 @@
 
             <li class="dropdown">
               <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                Lists <span class="caret"></span>
+                Grocery Lists <span class="caret"></span>
               </a>
 
-              <!-- display all lists -->
+              <!-- display all grocery lists -->
               <ul class="dropdown-menu" role="menu" ng-controller="ListController">
-                <li ng-repeat="list in lists">
+                <li ng-repeat="list in getListsByTag(lists, 'grocery')">
                   <a href="#/lists/{{list.name}}">{{list.name}}</a>
                 </li>
                 <li class="divider"></li>
@@ -48,13 +48,44 @@
               </ul>
             </li>
 
+            <!-- display all recipe lists -->
+            <li class="dropdown">
+              <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Recipies <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" ng-controller="ListController">
+                <li ng-repeat="list in getListsByTag(lists, 'recipe')">
+                  <a href="#/lists/{{list.name}}">{{list.name}}</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#/addlist">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    New List
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- display other lists -->
+            <li class="dropdown" ng-show="getListsByTag(lists, null).length">
+              <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Others <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" ng-controller="ListController">
+                <li ng-repeat="list in getListsByTag(lists, null)">
+                  <a href="#/lists/{{list.name}}">{{list.name}}</a>
+                </li>
+              </ul>
+            </li>
+
             <!-- foodstuffs -->
             <li>
               <a href="#/foodstuffs">Foodstuffs</a>
             </li>
 
           </ul>
-          
+
           <!-- readme -->
           <ul class="nav navbar-nav pull-right">
             <li>
