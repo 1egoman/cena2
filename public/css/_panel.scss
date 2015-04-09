@@ -11,3 +11,8 @@
   }
 
 }
+
+.search-box {
+  @extend .form-control;
+  border-radius: 0px;
+}
