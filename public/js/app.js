@@ -152,7 +152,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
   // add new list
   root.addList = function(list) {
     // tags
-    list.tags = list.tags || list.pretags.split(" ");
+    list.tags = list.tags || (list.pretags && list.pretags.split(" "));
     ListService.add(list, function(data) {
 
       // update all list instances
