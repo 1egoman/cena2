@@ -5,7 +5,8 @@ var foodstuffSchema = mongoose.Schema({
   "name": String,
   "desc": String,
   "tags": Array,
-  "price": String
+  "price": String,
+  "user": String
 });
 
 

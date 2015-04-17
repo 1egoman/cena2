@@ -21,7 +21,9 @@ createCRUD = function(app, Model, name) {
 
   // add new item
   app.post("/" + pl, function(req, res) {
-    var n = new Model(req.body);
+    data = req.body;
+    data.user = "admin";
+    var n = new Model(data);
     n.save(function(err) {
       if (err) {
         res.send({err: err.toString()});
