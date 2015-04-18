@@ -117,7 +117,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
       out = _.sortBy(out, function(n) {
         // find dates by regex
         dates = n.name.match(/[\d]{1,2}[\.\/-]?[\d]{1,2}[\.\/-]?[\d]{2,4}?/gi);
-        if (dates.length) {
+        if (dates && dates.length) {
           // format the regex output into a date,
           // and get the timestamp to compare
           preDate = dates[0].split(/[\.\/-]/gi);
