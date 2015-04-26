@@ -19,6 +19,8 @@
     ng-show="matchesSearchString(l, listSearchString)"
   >
     <div class="panel-heading" tooltip-placement="left" tooltip="Tags: {{l.tags.join(', ')}}">
+      <span class="list-{{c}}" ng-repeat="c in l.tags"></span>
+
       {{l.name}} <small>{{l.desc}}</small>
 
       <!-- delete button -->
