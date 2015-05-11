@@ -134,31 +134,31 @@ span.checkboxes { display: none; }
 .list-recipe { @extend .panel-info; }
 
 // gluten free
-.list-no-gluten .panel-heading::before {
-  content: "[GF]";
+.panel-heading .list-no-gluten::before {
+  content: "[GF] ";
   color: $brand-danger;
 }
 
 // veggitarian
-.list-veggie .panel-heading::before {
-  content: "[V]";
+.panel-heading .list-veggie::before {
+  content: "[V] ";
   color: green;
 }
 
 // my sister will eat it
-.list-maggie .panel-heading::before {
-  content: "[MG]";
+.panel-heading .list-maggie::before {
+  content: "[MG] ";
   color: #F0F;
 }
 
 // I'll eat it
-.list-ryan .panel-heading::before {
-  content: "[RY]";
+.panel-heading .list-ryan::before {
+  content: "[RY] ";
   color: #71C837;
 }
 
 // my dad will eat it
-.list-bob .panel-heading::before {
-  content: "[B]";
+.panel-heading .list-bob::before {
+  content: "[B] ";
   color: #36b8c7;
 }
