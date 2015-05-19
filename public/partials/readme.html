@@ -1,0 +1,68 @@
+<div class="panel pad">
+  <h3>Readme</h3>
+  <p>
+    Lists are the foundation of Cena v2 - Create a list for your shopping trip,
+    or even for a recipe. Lists are recursive, ie lists can contain other lists.
+  <p>
+
+  <p>
+    To add a recipe to Cena v2 create a new list (Lists -> Add new), and fill out the
+    relevant info. Remember to tag new recipes symantically:
+    <ul>
+      <li>
+        'grocery' defines a new grocery list. This should be used by convention so
+        that grocery lists are searchable in the search box (it will look for this tag).
+      </li>
+      <li>
+        'recipe' defines a new recipe. Lists with this tag are marked in the
+        overall list view with a light blue header to help them stand out.
+      </li>
+      <li>
+        'no-gluten' defines a gluten-free recipe. It will put a
+        <span style="color: red;">[GF]</span> into the toolbar.
+      </li>
+      <li>
+        'veg' defines a vegitarian meal. It will put a
+        <span style="color: green;">[V]</span> into the toolbar.
+      </li>
+      <li>
+        'maggie' defines a maggie-freindly meal. It will put a
+        <span style="color: #F0F;">[MG]</span> into the toolbar.
+      </li>
+      <li>
+        'ryan' defines a ryan-freindly meal. It will put a
+        <span style="color: #71C837;">[RY]</span> into the toolbar.
+      </li>
+      <li>
+        'bob' defines a bob-freindly meal. It will put a
+        <span style="color: #36b8c7;">[B]</span> into the toolbar.
+      </li>
+    </ul>
+
+    To sort lists into groups, tag them with tags that start with <code>sort-</code>. So, <code>sort-abc</code>
+    gets matched with all other <code>sort-abc</code>s and not with other tags. Anything that doesn't
+    provide a <code>sort-*</code> tag is put into the unsorted group.
+  </p>
+  <p>
+    To set up stores, tag them with tags that start with <code>shop-</code>; This
+    means <code>shop-abc</code> becomes a store that can easily be selected for
+    an item by clicking the button.
+  </p>
+  <p>
+    If you want any more tags, add them yourself! <code>Settings -> Tags</code>.
+    Type in your tag and hit enter in the box at the bottom of the list.
+  </p>
+
+  <p>
+    To add anything into a list, type its name into the textbox above the list and
+    click add. Remember, you can add lists to lists, so list names will also work here.
+    If you add a list and you only want a few things from it, a list of all the components
+    of the list will show up allowing you to delete some unneeded ingredients.
+  </p>
+
+  <p>
+    Descriptions should be a short phrase describing the item.
+  </p>
+
+  <br/><p>From, Ryan</p>
+</div>

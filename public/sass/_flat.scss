@@ -1,0 +1,28 @@
+// reset to the cena "flat" look
+@mixin flat($color-prefix:"color", $align:"center") {
+  border-radius: 0px;
+  width: 100%;
+  border: 0px;
+  text-align: #{$align};
+
+  &.#{$color-prefix}-primary {
+    background: $mid-cena-blue;
+    color: #FFFFFF;
+    &.color-muted { background: $light-cena-blue; }
+    &.color-bold { background: $dark-cena-blue; }
+  }
+
+  &.#{$color-prefix}-success {
+    background: $mid-cena-green;
+    color: #FFFFFF;
+    &.color-muted { background: $light-cena-green; }
+    &.color-bold { background: $dark-cena-green; }
+  }
+
+  &.#{$color-prefix}-danger {
+    background: $mid-cena-red;
+    color: #FFFFFF;
+    &.color-muted { background: $light-cena-red; }
+    &.color-bold { background: $dark-cena-red; }
+  }
+}

@@ -1,0 +1,136 @@
+<div ng-controller="FsController">
+
+  <!-- display each list -->
+  <div class="list panel panel-default">
+    <div class="panel-heading" style="cursor: pointer;" ng-click="foodstuffhidden = !foodstuffhidden">
+      Add Foodstuff
+
+      <!-- show hide add foodstuffs -->
+      <span
+        class="glyphicon glyphicon-chevron-up pull-right"
+        ng-hide="foodstuffhidden"
+      ></span>
+      <span
+        class="glyphicon glyphicon-chevron-down pull-right"
+        ng-show="foodstuffhidden"
+      ></span>
+    </div>
+
+    <div class="panel-body" ng-hide="foodstuffhidden">
+      <div class="input-group">
+        <label>Name</label>
+        <input type="text" class="form-control" ng-model="newFs.name" />
+      </div>
+
+      <div class="input-group">
+        <label>Description</label>
+        <input type="text" class="form-control" ng-model="newFs.desc" />
+      </div>
+
+      <div class="input-group">
+        <label>Price</label>
+        <input type="text" class="form-control" ng-model="newFs.price" />
+      </div>
+
+      <div class="input-group">
+        <label>Space-seperated tags</label>
+        <input type="text" class="form-control" id="fs-tags" ng-model="newFs.pretags" />
+      </div>
+
+      <!-- foodstuff tag buttons -->
+      <!-- custom, user tags -->
+      <div class="input-group tag-buttons">
+        <ul>
+          <li ng-repeat="tag in userTags">
+            <button ng-click='addTagToNewFoodstuff(tag.name)' class="btn btn-xs btn-{{tag.color || 'default'}}">
+              {{tag.name}}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="input-group">
+        <button class="btn btn-primary" ng-click="addFs(newFs)">Add Foodstuff</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="list panel panel-default">
+
+    <!-- foodstuffs search box -->
+    <div class="panel-body">
+      <input
+        type="text"
+        class="search-box"
+        placeholder="Search Foodstuffs"
+        ng-model="foodstuffs_search"
+        typeahead="l.name for l in foodstuffs | filter:$viewValue | limitTo:8"
+       />
+    </div>
+
+    <!-- loading icon -->
+    <span ng-hide="isData" class="glyphicon glyphicon-refresh spinning loading"></span>
+
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        ng-repeat="l in foodstuffs | reverse"
+        tooltip-placement="left"
+        tooltip="Tags: {{l.tags.join(', ')}}"
+        ng-show="matchesSearchString(l, foodstuffs_search)"
+        >
+        {{l.name}} <small>{{l.price | currency}}</small>
+
+        <!-- delete button -->
+        <button
+          class="btn btn-danger btn-xs pull-right"
+          ng-click="delFs(l)"
+          >Delete
+        </button>
+
+        <button
+          class="btn btn-primary btn-xs pull-right"
+          data-toggle="modal"
+          data-target="#edit-foodstuff-{{l._id}}"
+          style="margin-right: 10px;"
+          >Edit
+        </button>
+
+        <div class="modal fade" id="edit-foodstuff-{{l._id}}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Editing '{{l.name}}'</h4>
+              </div>
+              <div class="modal-body">
+
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" ng-model="l.desc" />
+                </div>
+
+                <div class="form-group">
+                  <label>Price</label>
+                  <input type="text" class="form-control" ng-model="l.price" />
+                </div>
+
+                <div class="form-group">
+                  <label>Space-seperated Tags</label>
+                  <input type="text" class="form-control" ng-model="pretags" ng-init="pretags = l.tags.join(' ')"/>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="modifyFs(l, pretags)">Save</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+      </li>
+    </ul>
+  </div>
+
+</div>

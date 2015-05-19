@@ -1,0 +1,44 @@
+
+.btn {
+  @include flat("btn", "left");
+  width: auto;
+}
+
+.panel {
+  @include flat("panel", "left");
+}
+
+// a special kind of textbox
+.line-box, .search-box {
+  @extend .form-control;
+  border-radius: 0px;
+  background: transparent;
+  border: 0px;
+  outline: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 1px solid $gray-dark;
+
+  &:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: $dark-cena-green;
+  }
+
+  &.blue-focus:focus {
+    border-color: $dark-cena-blue;
+  }
+}
+
+.modal .modal-content {
+  @include flat("modal", "left");
+}
+
+img.micro {
+  width: 16px;
+}
+
+// get rid of top/bottom padding in panel-bodys
+.panel-body.no-pad {
+  padding: 0px 15px;
+}

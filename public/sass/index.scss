@@ -1,0 +1,37 @@
+// == variables ==
+$light-cena-green: #A9D379;
+$mid-cena-green: #8BC34A;
+$dark-cena-green: #699833;
+
+$light-cena-blue: adjust_hue($light-cena-green, 128);
+$mid-cena-blue: adjust_hue($mid-cena-green, 128);
+$dark-cena-blue: adjust_hue($dark-cena-green, 128);
+
+$light-cena-red: adjust_hue($light-cena-blue, 128);
+$mid-cena-red: adjust_hue($mid-cena-blue, 128);
+$dark-cena-red: adjust_hue($dark-cena-blue, 128);
+
+// == imports ==
+@import url("//fonts.googleapis.com/css?family=Dosis");
+@import "bootstrap";
+
+@import "flat";
+@import "navbar";
+@import "panel";
+
+@import "controls";
+@import "login-form";
+@import "app";
+
+body {
+  background: $gray-lighter;
+  font-weight: 300;
+}
+
+pre, code {
+  @include flat("color", "left");
+}
+
+textarea {
+  resize: vertical;
+}

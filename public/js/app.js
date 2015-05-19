@@ -1,39 +1,39 @@
-var app = angular.module("Cena", ['ui.bootstrap', 'ngRoute']);
+var app = angular.module("Cena", ['ui.bootstrap', 'ngRoute', 'hc.marked']);
 
 // angular routing
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/lists', {
-        templateUrl: 'views/lists.html',
+        templateUrl: '/partials/lists.html',
         controller: 'ListController'
       }).
       when('/addlist', {
-        templateUrl: 'views/addlist.html',
+        templateUrl: '/partials/addlist.html',
         controller: 'ListController'
       }).
       when('/addlist/:type', {
-        templateUrl: 'views/addlist.html',
+        templateUrl: '/partials/addlist.html',
         controller: 'ListController'
       }).
       when('/lists/:list', {
-        templateUrl: 'views/lists.html',
+        templateUrl: '/partials/lists.html',
         controller: 'ListController'
       }).
       when('/foodstuffs', {
-        templateUrl: 'views/foodstuff.html',
+        templateUrl: '/partials/foodstuff.html',
         controller: 'ListController'
       }).
       when('/addfoodstuff', {
-        templateUrl: 'views/addlist.html',
+        templateUrl: '/partials/addlist.html',
         controller: 'ListController'
       }).
       when('/foodstuffs/:list', {
-        templateUrl: 'views/lists.html',
+        templateUrl: '/partials/lists.html',
         controller: 'ListController'
       }).
       when('/readme', {
-        templateUrl: 'views/readme.html'
+        templateUrl: '/partials/readme.html'
       }).
       otherwise({
         redirectTo: '/lists'
@@ -50,8 +50,14 @@ app.filter('reverse', function() {
   };
 });
 
-app.controller("ListController", function($scope, $routeParams, ListService, FoodStuffService, $rootScope, $location) {
+app.controller("ListController", function($scope, $routeParams, ListService, FoodStuffService, PrefsService, $rootScope, $location) {
   var root = $scope;
+  root.isData = false;
+
+  // get all the tags that have been set in user preferences
+  PrefsService.getTags(function(tags) {
+    root.userTags = tags;
+  });
 
   // place to store incoming list data
   root.newList = {
@@ -64,6 +70,7 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
 
   ListService.get(function(all) {
     root.lists = all;
+    root.isData = true;
 
     // get lists to display
     root.DispLists = _.filter(root.lists, function(list) {
@@ -237,6 +244,11 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     ListService.update(list);
   };
 
+  root.updateUsersModal = function(list) {
+    ListService.update(list);
+    $('.accessModal').modal('hide');
+  }
+
   // get items for typeahead
   root.getTypeahead = function(list) {
     return _.union(root.foodstuffs,
@@ -300,6 +312,54 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
     $("input#list-tags").focus();
   };
 
+  // grant a new user access to the specified list
+  root.addUserToList = function(l, user) {
+    root.lists[l].users.push(user);
+    console.log("ADD", root.lists[l].users, l)
+  }
+
+  // remove a user's access to the specified list
+  root.removeUserFromList = function(l, user) {
+    root.lists[l].users = _.without(root.lists[l].users, user);
+  }
+
+  // get all possible "shop" tags
+  root.getShops = function() {
+    return _.filter(root.userTags, function(t) {
+      return t.name.indexOf("shop-") === 0;
+    });
+  };
+
+  // add/delete shops for a specified list and item
+  root.addRemoveShop = function(l, cnt, s) {
+    // first, remove all shop tags.
+    cnt.tags = cnt.tags.filter(function(t) {
+      return t.indexOf("shop-") !== 0;
+    });
+
+    // then, add our new tag
+    if (s) {
+      cnt.tags.push(s);
+    };
+
+    // update
+    root.updateList(l);
+  };
+
+  // given a list item, reterive the shop
+  // that the list item will be bought at.
+  root.getShopForList = function(cnt) {
+    allShops = root.getShops();
+
+    shop = _.find(cnt.tags, function(t) {
+      return t.indexOf("shop-") === 0;
+    });
+
+    return _.find(allShops, function(s) {
+      return s.name === shop;
+    });
+  };
+
   // update all list instances
   $rootScope.$on("listUpdate", function(status, data) {
     root.lists = data;
@@ -326,9 +386,11 @@ app.controller("ListController", function($scope, $routeParams, ListService, Foo
 app.factory("ListService", function($http) {
   return {
     get: function(cb) {
+      // see if we are trying to get lists for the current user or another
+      user = _.last(location.pathname.split("/")).replace("/", "") || "";
       $http({
         method: "get",
-        url: "/lists"
+        url: "/lists/"+user
       }).success(function(data) {
         cb && cb(data.data);
       });
@@ -368,6 +430,7 @@ app.factory("ListService", function($http) {
 
 app.controller("FsController", function($scope, $routeParams, FoodStuffService, $rootScope, $modal) {
   var root = $scope;
+  root.isData = false;
 
   // place to store incoming list data
   root.newFs = {};
@@ -377,6 +440,7 @@ app.controller("FsController", function($scope, $routeParams, FoodStuffService, 
 
   FoodStuffService.get(function(all) {
     root.foodstuffs = all;
+    root.isData = true;
   });
 
   // add new list
@@ -500,4 +564,26 @@ app.factory("FoodStuffService", function($http) {
       });
     }
   };
+});
+
+app.factory("PrefsService", function($http) {
+  return {
+    tags: [],
+
+    getTags: function(callback) {
+      var root = this;
+      $http({
+        method: "get",
+        url: "/settings/tags"
+      }).success(function(data) {
+        root.tags = data.tags;
+        callback && callback(root.tags);
+      });
+    }
+  }
+});
+
+app.controller("NavController", function($scope) {
+  // get the user whoose lists we are viewing currently
+  $scope.owner = _.last(location.pathname.split("/")).replace("/", "");
 });
