@@ -9,10 +9,10 @@
   "author": "Ryan Gaus <rsg1egoman@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.10.1",
-    "express": "^4.11.0",
-    "express-static": "^1.0.3",
-    "mongoose": "^3.8.21",
-    "node-sass-middleware": "^0.5.0"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-static": "^1.1.0",
+    "mongoose": "^4.9.2",
+    "node-sass-middleware": "^0.11.0"
   }
 }
